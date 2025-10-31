@@ -1,0 +1,31 @@
+{
+  "name": "catalog",
+  "version": "1.0.0",
+  "main": "lcs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "description": "",
+  "dependencies": {
+    "better-sqlite3-session-store": "^0.1.0",
+    "crypto": "^1.0.1",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.18.2",
+    "morgan": "^1.10.1",
+    "nodemon": "^3.1.10",
+    "nunjucks": "^3.2.4",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "pugsql": "^0.0.17"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.0.4",
+    "@flydotio/dockerfile": "^0.7.10"
+  }
+}

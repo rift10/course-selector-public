@@ -1,0 +1,117 @@
+{% macro addCheck(course_id, id, text, list) %}
+  <label>
+    <input
+      type="checkbox"
+      id="{{ course_id + id }}"
+      class="{{ id }}"
+      {% if text in list %}checked{% endif %}/>
+      {{ text }}
+  </label>
+{% endmacro %}
+
+{% macro addFilter(isColor, text, className) %}
+  <a class="pill {{ className }}">{{ text }} ({{ className | upper }})</a>
+{% endmacro %}
+
+{% macro addPill(text) %}
+  <a class="pill {{ text }}">{{ text }}</a>
+{% endmacro %}
+
+{% macro view(course, UCOP) %}
+  <div class="card" id="{{ course.course_id }}">
+    <div class="metadata">
+      {% if course.ag %}
+        {{ addFilter(true, UCOP[course.ag], course.ag) }}
+      {% endif %}
+      {% for grade in course.allowedGrades %}
+        {{ addPill(grade) }}
+      {% endfor %}
+      {% for slc in course.slcs %}
+        {{ addPill(slc) }}
+      {% endfor %}
+      {% for category in course.categories %}
+        {{ addPill(category) }}
+      {% endfor %}
+    </div>
+    <h1 class="courseTitle"> {{ course.title }} 
+      {% if course.ic_id %}
+        <span class="ic">{{ course.ic_id }}</span>
+      {% endif %}
+    </h1>
+    <span>{{ course.duration }} • {{ course.credits }} Credits</span>
+    <p class="description"> {{ course.description }} </p>
+    <p class="prerequisite">Prerequisites:
+      {% if course.prerequisite %}
+        {{ course.prerequisite }}
+      {% elif course.prerequisites.length === 0 %}
+        N/A
+      {% endif %}
+    </p>
+    <div class="prereqHolder">
+      {% for prerequisite in course.prerequisites or [] %}
+        <a class="pill prereqPill" href="#{{ prerequisite.prerequisite_id }}">{{ prerequisite.prerequisite_title }}</a>
+      {% endfor %}
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro edit(course, UCOP) %}
+  <div class="card" id="{{ course.course_id }}">
+    <div class="metadata">
+      {% if course.ag %}
+        {{ addFilter(true, UCOP[course.ag], course.ag) }}
+      {% endif %}
+      {% for category in course.categories %}
+        {{ addPill(category) }}
+      {% endfor %}
+    </div>
+
+    <h1 class="courseTitle"> {{ course.title }} 
+      {% if course.ic_id %}
+        <span class="ic">{{ course.ic_id }}</span>
+      {% endif %}
+    </h1>
+    <p class="description" contentEditable="true"> {{ course.description }} </p>
+
+    {% if course.prerequisite %}
+      <p class="prerequisite" contentEditable="true"> {{ course.prerequisite }} </p>
+    {% endif %}
+
+    <div class="prereqHolder">
+      {% for prerequisite in course.prerequisites or [] %}
+        <a class="pill prereqPill" href="#{{ prerequisite.prerequisite_id }}">{{ prerequisite.prerequisite_title }}</a>
+      {% endfor %}
+    </div>
+
+    <div class="edit">
+      <div class="choices">
+        <span>Recommended grades</span>
+        <div>
+          {{ addCheck(course.course_id, "recommend9", 9, course.recommendedGrades) }}
+          {{ addCheck(course.course_id, "recommend10", 10, course.recommendedGrades) }}
+          {{ addCheck(course.course_id, "recommend11", 11, course.recommendedGrades) }}
+          {{ addCheck(course.course_id, "recommend12", 12, course.recommendedGrades) }}
+        </div>
+
+        <span>Allowed grades</span>
+        <div>
+          {{ addCheck(course.course_id, "allow9", 9, course.allowedGrades) }}
+          {{ addCheck(course.course_id, "allow10", 10, course.allowedGrades) }}
+          {{ addCheck(course.course_id, "allow11", 11, course.allowedGrades) }}
+          {{ addCheck(course.course_id, "allow12", 12, course.allowedGrades) }}
+        </div>
+
+        <span>Allowed SLCs</span>
+        <div>
+          {{ addCheck(course.course_id, "AC", "AC", course.slcs) }}
+          {{ addCheck(course.course_id, "AHA", "AHA", course.slcs) }}
+          {{ addCheck(course.course_id, "AMPS", "AMPS", course.slcs) }}
+          {{ addCheck(course.course_id, "BIHS", "BIHS", course.slcs) }}
+          {{ addCheck(course.course_id, "CAS", "CAS", course.slcs) }}
+          {{ addCheck(course.course_id, "U9", "U9", course.slcs) }}
+        </div>
+      </div>
+    </div>
+    <span class="pill  submit" id="submit{{ course.course_id }}">Submit Edits</span>
+  </div>
+{% endmacro %}

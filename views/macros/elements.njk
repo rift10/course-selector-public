@@ -1,0 +1,52 @@
+{% macro dropdown(userInfo, divId, buttonId, text, options) %}
+  <div id="{{ divId }}" class="dropdownUnit">
+    <span class="textSpan"> <b> {{ text }} </b> </span>
+    <div class="dropdown">
+      <span id="{{ buttonId }}" class="dropdownButton pill">
+        {% if userInfo %}
+          {{ userInfo }}
+        {% else %}
+          Choose {{ text }}
+        {% endif %}
+      </span>
+      <div class="dropdownContent">
+      {% for option in options %}
+        <span class="dropdownItem">{{ option }}</span>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro sidebar(user, page) %}
+  <span id="hamburger" class="pill">☰</span>
+  <div id="sideMenu">
+    <div class="sideMenuHeader">
+      <h2>Settings</h2>
+    </div>
+    <section id="settings">
+        <div>
+          <div class="dropdowns">
+            {{ dropdown(user.grade, 'chooseGrade', 'gradeDropdown', 'Grade', [9, 10, 11, 12])}}
+            {{ dropdown(user.slc, 'chooseSlc', 'slcDropdown', 'SLC', ['U9', 'AC', 'AHA', 'AMPS', 'BIHS', 'CAS', 'BIS'])}}
+          </div>
+          <span id="updateInfo" class="pill">Save Changes</span>
+        </div>
+        <div class="themeToggle">
+          <label class="switch">
+            <input type="checkbox" id="themeSwitch">
+            <span class="slider"></span>
+          </label>
+          <span class="marginLeft">Dark Mode</span>
+        </div>
+        {% if page === 'home' or page === 'edit' %}
+          <a class="pill"id="enterSection" href="/slc">Browse by Section</a>
+        {% endif %}
+        {% if page === 'home' or page === 'section' %}
+          <a class="pill"id="enterEdit" href="/edit">Enter Editing Mode</a>
+        {% endif %}
+        <a id="logout" class="pill"href="/logout">Logout</a>
+    </section>
+  </div>
+  <div id="overlay"></div>
+{% endmacro %}

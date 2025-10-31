@@ -1,0 +1,28 @@
+{% import 'macros/elements.njk' as elements %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>BHS Course Catalog Section</title>
+    <link href="/style.css" media="all" rel="stylesheet" type="text/css">
+    <script src="../script.js" type="module"></script>
+  </head>
+  <body>
+    <section id="header">
+      <div id="navbar">
+        <a class="title" href="/"><h1>Berkeley High Course Catalog</h1></a>
+        {{ elements.sidebar(user, 'section') }}
+    </section>
+    <section id="links">
+        <a class="pill" href="/slc/u9">Universal 9th Grade</a>
+        <a class="pill" href="/slc/ac">Academic Choice</a>
+        <a class="pill" href="/slc/aha">Arts and Humanities Academy</a>
+        <a class="pill" href="/slc/amps">Academy of Medicine and Public Service</a>
+        <a class="pill" href="/slc/bihs">Berkeley International High School</a>
+        <a class="pill" href="/slc/cas">Communication Arts and Science</a>
+        <a class="pill" href="/slc/bis">Berkeley Independent Study</a>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+{% import 'macros/courseCard.njk' as card %}
+{% import 'macros/elements.njk' as elements %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>BHS Course Catalog Editing</title>
+    <link href="style.css" media="all" rel="stylesheet" type="text/css">
+    <script src="script.js" type="module"></script>
+</head>
+<body>
+  <section id="header">
+    <div id="navbar">
+      {{ elements.sidebar(user, 'edit') }}
+      <a href="/" class="title"><h1>Berkeley High Course Catalog</h1></a>
+    </div>
+    <div class="agFilters">
+      {% for key, value in UCOP %}
+        {{ card.addFilter(false, value, key) }}
+      {% endfor %}
+    </div>
+    <div class="levelFilters">
+      {% for key, value in levels %}
+        {{ card.addFilter(false, value, key) }}
+      {% endfor %}
+    </div>
+    <div class="otherFilters">
+      {% for key, value in otherFilters %}
+        {{ card.addFilter(false, value, key) }}
+      {% endfor %}
+    </div>
+  </section>
+  <div class="hidden" id="message"></div>
+  <section id="cards">
+    {% for course in courses %}
+      {{ card.edit(course, UCOP) }}
+    {% else %}
+      <h2>No Results Found</h2>
+    {% endfor %}
+    {# <button id="plusButton">+</button> #}
+  </section>
+</body>
+</html>

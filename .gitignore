@@ -1,0 +1,31 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Environment variables
+.env
+
+# npm
+node_modules/
+
+# Created by make
+catalog.json
+ic-courses.json
+matches.json
+sql/db.db*
+sql/queries.sql
+grade-pairs.tsv
+slc-pairs.tsv
+prereqs.tsv
+dump.sql
+sessions.db
+
+# Settings
+.vscode

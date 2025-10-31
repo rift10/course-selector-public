@@ -1,0 +1,43 @@
+{% import 'macros/courseCard.njk' as card %}
+{% import 'macros/elements.njk' as elements %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>BHS Course Catalog Section</title>
+    <link href="/style.css" media="all" rel="stylesheet" type="text/css">
+    <script src="../script.js" type="module"></script>
+  </head>
+  <body>
+    <section id="header">
+      <div id="navbar">
+        <div class="title">
+          <a href="/"><h1>Berkeley High Course Catalog</h1></a>
+          <h2>{{ header }}</h2>
+        </div>
+        {{ elements.sidebar(user, 'section') }}
+      </div>
+        <div class="sectionPages">
+        <a class="pill" href="/slc/u9">U9</a>
+        <a class="pill" href="/slc/ac">AC</a>
+        <a class="pill" href="/slc/aha">AHA</a>
+        <a class="pill" href="/slc/amps">AMPS</a>
+        <a class="pill" href="/slc/bihs">BIHS</a>
+        <a class="pill" href="/slc/cas">CAS</a>
+        <a class="pill" href="/slc/bis">BIS</a>
+      </div>
+    </section>
+    <section id="sectionInfo">
+        {% include "partials/" + slc + ".njk" %}
+    </section>
+    <section id="cards">
+      {% for course in courses %}
+        {{ card.view(course, UCOP) }}
+      {% else %}
+        <h2>No Results Found</h2>
+      {% endfor %}
+    </section>
+  </body>
+</html>

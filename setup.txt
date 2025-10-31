@@ -1,0 +1,68 @@
+AWS setup steps
+1. Create Security Groups
+  - Create an aws account
+  - Go to network & security > security groups
+  - Create one security group called something like 'selector-instance'
+  - Add a short description (this is the security group that will be used for the ec2 instance)
+  - Create 3 inbound rules:
+    - One with type custom tcp and port range 8080, with a source of the default security group (this MUST BE CHANGED LATER!!)
+    - One with type ssh, port 22, and source 0.0.0.0/0
+    - And one with type http, port 80, also sourced from the default security group (also has to be changed later)
+  - Create one outbound rule that allows all traffic from all port ranges with destination 0.0.0.0/0
+  - Create a second security group named something like 'selector-load-balancer' with an appropriate description
+  - Create 2 inbound rules:
+    - One with type https, port range 443, and source 0.0.0.0/0
+    - One with type http, port 80, and source 0.0.0.0/0
+  - Create 2 outbound rules:
+    - One with type custom tcp, port range 8080, and set the destination to the selector-instance security group
+    - One with type http, port range 80, and again set the desination to the selector-instance security group
+  - Now change the default security groups sourced on the selector-instance security group to the load-balancer security group
+2. Launch an EC2 Instance
+  - Go to ec2 > instances > launch an instance
+  - Name it something like 'BHS Course Selector'
+  - Choose an AMI available to the free tier (in hindsight, probably Ubuntu is better, but I chose Amazon Linux - the only difference I noticed is that you have to use 'yum' instead of 'apt')
+  - Instance type will be t2.micro
+  - Create a new RSA .pem key pair, save it somewhere safe
+  - In network settings, choose 'select existing security group' and choose the selector-instance one
+  - In storage, click 'advanced', then 'volume 1', then change 'delete on termination' to no
+  - Finally click 'launch instance'
+3. Create a Load Balancer
+  - Go to ec2 > load balancers > create load balancer
+  - Choose 'application load balancer', name it something like 'course-selector-load-balancer'
+  - For load balancer IP address type, it's probably best to choose 'dualstack without public ipv4 address' to avoid additional costs, but I chose ipv4 (works fine but $3.70 monthly cost)
+  - For security groups, choose the selector-load-balancer group from step 1
+  - Click create load balancer
+4. Create a Target Group
+  - Go to ec2 > target groups > create target group
+  - Choose target type instance, set name to something like 'selector-http-server'
+  - Protocol is HTTP; port is 8080
+  - Health check path should be '/health'
+  - Click next, then include the ec2 instance in pending, then click create target group
+  - Go to ec2 > load balancers, select the course-selector-load-balancer, then go to listeners & rules > add listener
+  - Add a listener for http protocol on port 80 with default action forward to target group selector-http-server
+5. Configure instance in terminal
+  - Open local terminal (open wsl if on a windows computer)
+  - ssh in using the .pem file, will look something like 'ssh -i <path-to-key-file>.pem ec2-user@<public-ip-address>'
+  - sudo yum update
+  - sudo yum upgrade
+  - curl -fsSL https://rpm.nodesource.com/setup_current.x | sudo bash - (if that doesn't work do curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -)
+  - sudo yum install nodejs
+  - ssh-keygen (no passphrase)
+  - home/user/.ssh/id_rsa
+  - cat ~/.ssh/id_rsa.pub
+  - Add to github: Profile > Settings > SSH and GPG keys > New SSH Key
+  - Go to https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints
+  - Get github key and create ~/.ssh/known_hosts with the Github key as the contents
+  - git clone git@github.com:gigamonkey/bhs-catalog.git
+  - cd bhs-catalog/
+  - npm install
+  - vi .env and paste in .env from local repo (i to edit the file, esc : w q to write and quit)
+  - wget https://www.sqlite.org/2025/sqlite-autoconf-3500200.tar.gz
+  - tar -xzf sqlite-autoconf-3500200.tar.gz
+  - cd sqlite-autoconf-3500200/
+  - ./configure --prefix=/usr
+  - wget https://github.com/johnkerl/miller/releases/download/v6.14.0/miller-6.14.0-linux-amd64.tar.gz
+  - cd miller-6.14.0-linux-amd64
+  - mv mlr /home/ec2-user/.local/bin
+  - make
+  - make run
