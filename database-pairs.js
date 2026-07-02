@@ -25,34 +25,69 @@ const insertPairs = (data, type) => {
   for (const key in map) {
     for (const value of [...map[key]]) {
       const courseId = db.getIdFromCourseTitle({ courseTitle: key });
-      if (type === 'grade') {
-        db.insertGrade({
-          courseId,
-          grade: value,
-          status: 'allowed',
-        });
-      } else if (type === 'slc') {
-        db.insertSlc({
-          courseId,
-          slc: value.trim(),
-        });
-      } else if (type === 'prereq') {
-        db.insertPrerequisite({
-          courseId,
-          prerequisiteId: db.getIdFromCourseTitle({ courseTitle: value.trim() }),
-          type: 'required',
-        });
-      } else if (type === 'ic-info') {
-        db.insertCourseNumber({
-          courseId: db.getIdFromCourseTitle({ courseTitle: value }),
-          courseNumber: key,
-        });
+
+      switch (type) {
+        case 'grade':
+          db.insertGrade({
+            courseId,
+            grade: value,
+            status: 'allowed',
+          });
+          break;
+
+        case 'slc':
+          db.insertSlcProtected({
+            courseId,
+            slc: value.trim(),
+          });
+          break;
+
+        case 'prereq':
+          db.insertPrereqFromTitle({
+            courseId,
+            prereqTitle: value.trim(),
+            type: 'required',
+          });
+          break;
+
+        case 'ic-info':
+          db.insertIcIdFromTitle({
+            title: value,
+            courseNumber: key,
+          });
+          break;
+        case 'subject':
+          db.insertSubject({
+            courseId,
+            subject: value.trim(),
+          });
+          break;
+        case 'period':
+          db.insertPeriod({
+            courseId: db.getIdFromCourseTitle({ courseTitle: value }),
+            allowedPeriod: key.trim(),
+          });
+          break;
       }
     }
   }
 };
 
-insertPairs(await loadFile('grade-pairs.tsv'), 'grade');
-insertPairs(await loadFile('slc-pairs.tsv'), 'slc');
-insertPairs(await loadFile('prereqs.tsv'), 'prereq');
-insertPairs(await loadFile('matched.tsv'), 'ic-info');
+insertPairs(await loadFile('tsvs/subject-pairs.tsv'), 'subject');
+insertPairs(await loadFile('tsvs/grade-pairs.tsv'), 'grade');
+insertPairs(await loadFile('tsvs/slc-pairs.tsv'), 'slc');
+insertPairs(await loadFile('tsvs/prereqs.tsv'), 'prereq');
+insertPairs(await loadFile('tsvs/periods.tsv'), 'period');
+
+// insert real ic ids
+insertPairs(await loadFile('tsvs/matched.tsv'), 'ic-info');
+
+// insert fake ic ids
+let i = 10;
+for (const c of [...db.unmatchedCourses()]) {
+  db.insertCourseNumber({
+    courseId: c.course_id,
+    courseNumber: `XX${i}${c.duration.trim() === 'Year' ? 'Y' : 'S'}`,
+  });
+  i++;
+}

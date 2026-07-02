@@ -9,8 +9,12 @@
   </label>
 {% endmacro %}
 
-{% macro addFilter(isColor, text, className) %}
+{% macro addFilter(text, className) %}
   <a class="pill {{ className }}">{{ text }} ({{ className | upper }})</a>
+{% endmacro %}
+
+{% macro addSpan(text, className) %}
+  <span class="pill {{ className }}">{{ text }} ({{ className | upper }})</span>
 {% endmacro %}
 
 {% macro addPill(text) %}
@@ -18,20 +22,24 @@
 {% endmacro %}
 
 {% macro view(course, UCOP) %}
-  <div class="card" id="{{ course.course_id }}">
-    <div class="metadata">
-      {% if course.ag %}
-        {{ addFilter(true, UCOP[course.ag], course.ag) }}
-      {% endif %}
-      {% for grade in course.allowedGrades %}
-        {{ addPill(grade) }}
-      {% endfor %}
-      {% for slc in course.slcs %}
-        {{ addPill(slc) }}
-      {% endfor %}
-      {% for category in course.categories %}
-        {{ addPill(category) }}
-      {% endfor %}
+  <div class="card" id="course{{ course.course_id }}">
+    <div class="courseHeader">
+      <a class="star {{ "starred" if course.star }}" id="star{{ course.course_id }}" data-starred={{ "true" if course.star else "false"}}>
+        {{ "★" if course.star else "☆" }}</a>
+      <div class="metadata">
+        {% if course.ag %}
+          {{ addFilter(UCOP[course.ag], course.ag) }}
+        {% endif %}
+        {% for grade in course.allowedGrades %}
+          {{ addPill(grade) }}
+        {% endfor %}
+        {% for slc in course.slcs %}
+          {{ addPill(slc) }}
+        {% endfor %}
+        {% for category in course.categories %}
+          {{ addPill(category) }}
+        {% endfor %}
+      </div>
     </div>
     <h1 class="courseTitle"> {{ course.title }} 
       {% if course.ic_id %}
@@ -56,10 +64,10 @@
 {% endmacro %}
 
 {% macro edit(course, UCOP) %}
-  <div class="card" id="{{ course.course_id }}">
+  <div class="card" id="course{{ course.course_id }}">
     <div class="metadata">
       {% if course.ag %}
-        {{ addFilter(true, UCOP[course.ag], course.ag) }}
+        {{ addFilter(UCOP[course.ag], course.ag) }}
       {% endif %}
       {% for category in course.categories %}
         {{ addPill(category) }}
@@ -112,6 +120,20 @@
         </div>
       </div>
     </div>
-    <span class="pill  submit" id="submit{{ course.course_id }}">Submit Edits</span>
+    <a class="pill  submit" id="submit{{ course.course_id }}">Submit Edits</a>
+  </div>
+{% endmacro %}
+
+{% macro mini(course, grade, UCOP) %}
+  <div class="card miniCard {{ "year" if course.duration === "Year" else "semester" }}
+      {{ "zero" if course.allowed_period == '0' }} {{ "seven" if course.allowed_period == '7' }} {{ "ext" if course.allowed_period == 'ext' }}"
+      draggable="true" id="course{{ course.course_id }}"
+      data-period="{{ course.period }}" data-grade="{{ grade if grade != -1}}">
+    <h1 class="courseTitle"> {{ course.title }} 
+      <span class="ic">{{ "Y" if course.duration === "Year" else "S" }}</span>
+      {% if course.ag %}
+        {{ addSpan(UCOP[course.ag], course.ag) }}
+      {% endif %}
+    </h1>
   </div>
 {% endmacro %}

@@ -16,31 +16,36 @@
         {{ elements.sidebar(user, 'home') }}
         <a href="/" class="title"><h1>Berkeley High Course Catalog</h1></a>
       </div>
+      <div class="slcFilters">
+        {% for key, value in slcFilters %}
+          {{ card.addFilter(value, key) }}
+        {% endfor %}
+      </div>
       <div class="agFilters">
         {% for key, value in UCOP %}
-          {{ card.addFilter(false, value, key) }}
+          {{ card.addFilter(value, key) }}
         {% endfor %}
       </div>
       <div class="levelFilters">
         {% for key, value in levels %}
-          {{ card.addFilter(false, value, key) }}
+          {{ card.addFilter(value, key) }}
         {% endfor %}
       </div>
       <div class="otherFilters">
         {% for key, value in otherFilters %}
-          {{ card.addFilter(false, value, key) }}
+          {{ card.addFilter(value, key) }}
         {% endfor %}
       </div>
-      {# <div class="sectionPages">
-        <a class="pill">U9</a>
-        <a class="pill">AC</a>
-        <a class="pill">AHA</a>
-        <a class="pill">AMPS</a>
-        <a class="pill">BIHS</a>
-        <a class="pill">CAS</a>
-        <a class="pill">BIS</a>
+      <div class="gradeFilters">
+        {% for key, value in gradeFilters %}
+          {{ card.addFilter(value, key) }}
+        {% endfor %}
+      </div>
+      {# <div id="searchBar">🔍 Search
+        <span contentEditable="true"></span>
       </div> #}
     </section>
+    <div class="hidden" id="message"></div>
     <section id="cards">
       {% for course in courses %}
         {{ card.view(course, UCOP) }}

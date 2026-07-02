@@ -1,6 +1,16 @@
+SHELL := /bin/bash
+
 .PHONY: all clean matching match-pairs
 
-all: public/catalog.json matches.json sql/db.db sql/queries.sql match-pairs
+all: public/catalog.json matches.json sql/db.db sql/queries.sql match-pairs order
+
+order:
+	sort -nt $$'\t' -k 2,2 -o tsvs/grade-pairs.tsv tsvs/grade-pairs.tsv
+	sort -t $$'\t' -k 2,2 -o tsvs/matched.tsv tsvs/matched.tsv
+	sort -t $$'\t' -k 1,1 -o tsvs/prereqs.tsv tsvs/prereqs.tsv
+	sort -t $$'\t' -k 2,2 -o tsvs/slc-pairs.tsv tsvs/slc-pairs.tsv
+	sort -t $$'\t' -k 2,2 -o tsvs/subject-pairs.tsv tsvs/subject-pairs.tsv
+	sort -t $$'\t' -k 2,2 -o tsvs/periods.tsv tsvs/periods.tsv
 
 run:
 	npx nodemon --delay 2 --watch . -e js,json,njk,html,sql index.js
@@ -13,7 +23,7 @@ fix:
 
 deploy:
 	sqlite3 sql/db.db .dump > dump.sql
-	fly secrets import --stage < .env
+	fly secrets import --stage < secrets/prod.env
 	fly deploy
 
 publish:
@@ -25,10 +35,9 @@ public/catalog.json: extract.py catalog.txt
 ic-courses.json: ic-courses.csv
 	mlr --icsv --ojson cat $< | jq '[ .[] | .courseInfo ]' > $@
 
-match-pairs: sql/schema.sql grade.py slc.py database-pairs.js
-	uv run grade.py
-	uv run slc.py
+match-pairs: sql/schema.sql database-pairs.js
 	node database-pairs.js
+	node database-defaults.js
 
 matches.json: match-names.js public/catalog.json ic-courses.json
 	./$< > $@
@@ -39,7 +48,7 @@ matches.csv: matches.json
 sql/db.db: sql/schema.sql sql/queries.sql
 	sqlite3 $@ < sql/schema.sql
 	node database.js
-	sqlite3 --tabs $@ '.import matched.tsv matched'
+	sqlite3 --tabs $@ '.import tsvs/matched.tsv matched'
 
 sql/queries.sql: sql/schema.sql
 	npx puglify sql/schema.sql > $@
@@ -65,6 +74,3 @@ clean:
 	rm -f sql/db.db
 	rm -f sql/queries.sql
 	rm -f unmatched*.tsv
-	rm -f grade-pairs.tsv
-	rm -f slc-pairs.tsv
-	rm -f prereqs.tsv

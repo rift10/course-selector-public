@@ -26,3 +26,31 @@ icCourses.forEach((course) => {
 });
 
 matches.forEach((match) => db.insertPotentialMatch(match));
+
+db.insertGradRequirement({ reqId: 1, subject: 'gov', credit: 5 });
+db.insertGradRequirement({ reqId: 2, subject: 'bio', credit: 10 });
+db.insertGradRequirement({ reqId: 3, subject: 'econ', credit: 5 });
+db.insertGradRequirement({ reqId: 4, subject: 'elect', credit: 70 });
+db.insertGradRequirement({ reqId: 5, subject: 'eng', credit: 40 });
+db.insertGradRequirement({ reqId: 6, subject: 'ethnic', credit: 10 });
+db.insertGradRequirement({ reqId: 7, subject: 'math1', credit: 10 });
+db.insertGradRequirement({ reqId: 8, subject: 'math', credit: 10 });
+db.insertGradRequirement({ reqId: 9, subject: 'pe', credit: 20 });
+db.insertGradRequirement({ reqId: 10, subject: 'phys', credit: 10 });
+db.insertGradRequirement({ reqId: 11, subject: 'ush', credit: 10 });
+db.insertGradRequirement({ reqId: 12, subject: 'wh', credit: 10 });
+db.insertGradRequirement({ reqId: 13, subject: 'lacte', credit: 10 });
+
+db.insertRequirementSubject({ reqId: 1, generalSubject: 'soc' });
+db.insertRequirementSubject({ reqId: 2, generalSubject: 'sci' });
+db.insertRequirementSubject({ reqId: 3, generalSubject: 'soc' });
+db.insertRequirementSubject({ reqId: 4, generalSubject: 'elect' });
+db.insertRequirementSubject({ reqId: 5, generalSubject: 'eng' });
+db.insertRequirementSubject({ reqId: 6, generalSubject: 'soc' });
+db.insertRequirementSubject({ reqId: 7, generalSubject: 'math' });
+db.insertRequirementSubject({ reqId: 8, generalSubject: 'math' });
+db.insertRequirementSubject({ reqId: 9, generalSubject: 'pe' });
+db.insertRequirementSubject({ reqId: 10, generalSubject: 'sci' });
+db.insertRequirementSubject({ reqId: 11, generalSubject: 'soc' });
+db.insertRequirementSubject({ reqId: 12, generalSubject: 'soc' });
+db.insertRequirementSubject({ reqId: 13, generalSubject: 'lacte' });

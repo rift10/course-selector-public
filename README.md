@@ -6,19 +6,22 @@
 
 - [X] Filter course view
 - [ ] Course edit view w/ editable IC course #'s
-- [ ] Sample SLC pages a la PDF catalog.
+- [X] Sample SLC pages a la PDF catalog.
 - [X] Link courses to IC course numbers in DB.
+
 
 ### Deploy to counselors
 
 - [ ] All editing UI complete (everything that needs to be editable can be)
-- [ ] Change logging in DB
+- [ ] Change logging in DB (add who did it and when)
+
 
 ### Deploy to students
 
 - [ ] Separate logged in & logged out site versions
 - [ ] Login screen to choose grade/slc
 - [ ] Personalized recommendations based on grade/slc 
+
 
 ## Todo
 
@@ -37,10 +40,17 @@
 - [ ] Filtering
   - [X] Categories like P, AP, CTE, etc
   - [ ] Add afam, mlp, inclusive ed filters
-  - [ ] SLC/Grade
+  - [X] SLC/Grade
+  - [ ] Add search bar
+    - [ ] Equivalent of ctrl+f
+    - [ ] Advanced searching (eg contains string in prerequisites)
 - [X] Parse prerequisites into machine-readable form (link to other courses)
   - [X] Link prerequisites to other courses in the UI
 - [X] Add grade meta data to courses. Maybe two: "open to", and "generally for"
+- [ ] Interaction with teachers
+  - [ ] Official descriptions and separate section of notes from the teacher
+  - [ ] 'Advice from teacher if you don't have a prerequisite' section
+- [ ] Something to help counselors when picking classes for students who need another class (soft prerequisites)
 - [X] Link with IC course codes
   - [X] Get IC course codes
   - [X] Map between catalog names and course codes
@@ -69,13 +79,18 @@
   - [X] Store users' grade & slc info
   - [X] Recommend courses based on whether a person can take a class based on slc/grade
   - [X] Sort courses by prerequisites and grade-level so earlier courses are listed first (maybe have a relevance score for each course)
-  - [ ] Recomemend courses based on previous courses taken (don't recommend if already taken)
-  - [ ] Recomemend courses based on credits left to graduate/for UCs
+  - [ ] Recommend courses based on previous courses taken (don't recommend if already taken)
+    - [ ] Find some way to get transcript
+      - [ ] some api (maybe from other website)
+      - [ ] manually inputting them (make it smart though)
+      - [ ] instructions to download transcript from ic
+  - [ ] Recommend courses based on credits left to graduate/for UCs
 - [ ] Schedule creation
-  - [ ] Let users add classes to a 'shopping cart' (potential schedule)
-  - [ ] Store users' past courses in database
-  - [ ] Have progress bars for each a-g credit (or something similar)
-  - [ ] Maybe have different schedule sheets for all four years
+  - [x] Let users add classes to a 'shopping cart' (potential schedule)
+  - [x] Store users' past courses in database
+  - [x] Have progress bars for each a-g credit (or something similar)
+  - [x] Maybe have different schedule sheets for all four years (drag and drop schedule, with one column for each year)
+  - [ ] Constrain which classes a user can add to their schedule based on slc
 - [ ] Online editing
   - [X] Checkboxes to edit the grades/slcs each course is open to
   - [X] UI for changing course descriptions
@@ -87,6 +102,11 @@
   - [X] Add optional Google auth for berkeley.net addresses for write actions
   - [ ] Store log of edits in DB recording who, when, and new value.
   - [ ] Allow editors to add in new courses
+- [ ] Other improvements
+  - [ ] How to handle prerequisites where you can be concurrently enrolled
+  - [ ] Add support for Independent Study
+  - [ ] Add support for switching SLCs
+  - [ ] Make foreign language only fill up with the same language
 
 ## How we got here
 

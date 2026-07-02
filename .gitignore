@@ -10,7 +10,8 @@ wheels/
 .venv
 
 # Environment variables
-.env
+*.env
+!secrets/template.env
 
 # npm
 node_modules/
@@ -21,9 +22,6 @@ ic-courses.json
 matches.json
 sql/db.db*
 sql/queries.sql
-grade-pairs.tsv
-slc-pairs.tsv
-prereqs.tsv
 dump.sql
 sessions.db
 

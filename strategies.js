@@ -1,5 +1,7 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+
+dotenv.config({ quiet: true, path: './secrets/.env' });
 
 // Passport strategy for Google OAuth
 

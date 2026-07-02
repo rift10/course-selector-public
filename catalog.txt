@@ -40,6 +40,19 @@ limited to prose stories, plays, poetry, and film. Students will most closely
 examine the literary strategies recommended by the College Board: character,
 setting, structure, narration, and figurative language. UC/CSU (b)
 
+AHA Advanced Creative Arts (P) Year · 10.0 Credits
+
+The course of study will focus on line, perspective, shading techniques,
+positive/negative space understandings, and composition. Students coming into the 
+class without drawing experience will gain the skills needed to render
+objects from what they see in reality. Students will also learn the reductive and
+additive elements of sculpture and printmaking. Sculpture is three
+dimensional art and printmaking is the process of making multiple copies of an image.
+A common form of printmaking is screen printing t-shirts. Students in this
+course will work with welding, screen-printing, plaster,
+etching, clay and linoleum block prints, 3D printing,
+laser cutting, and traditional drawing media.
+
 AHA AP Studio Art (AP)(H)(P)(CTE) Year · 10.0 Credits
 
 The Advanced Placement Studio Art program enables highly motivated students to
@@ -177,6 +190,26 @@ Through an integrated English/history project, students write a comprehensive,
 analytical college-level research paper exploring the interplay of social and
 economic structures in American society in an industry field of their choice.
 UC/CSU (g)
+
+AMPS Literacy, Advocacy and Public Service: Advanced English in Public Service Work (P)(H)(CTE) Year · 10.0 Credits
+
+Through this upper division English Course, students hone their reading, writing,
+speaking and presentation skills to become effective and empowered agents of
+change as they explore the impact that the field of Public
+Administration and Social Services has on their community, state and country.
+Through close reading and analysis of informational and literary texts written for
+a variety of purposes and audiences, students examine
+instances when personal identity becomes political and
+the way in which societal issues are influenced by and
+can be addressed through public administration, social
+service agencies and community organizations. Because
+writing and communication are just as critical to effective
+advocacy as research, synthesis and close reading,
+students themselves compose text for real audiences and
+authentic purposes from using a variety of digital media
+to inform those for whom social services has direct and
+indirect impact to making public arguments to effect
+positive change. UC/CSU (b)
 
 AMPS World History & Cultures (P) Year · 10.0 Credits
 
@@ -487,8 +520,8 @@ level course, the curriculum is aligned with College Board AP requirements, and
 assessments are modeled on the AP US Government & Politics exam. Students
 enrolled in this class, however, are NOT required to take the AP exam in the
 spring. However, should they choose to do so, the course content is designed to
-ensure they will be well prepared. This class satisfies graduation require-
-ments for government. UC/CSU (a)
+ensure they will be well prepared. This class satisfies graduation requirements
+for government. UC/CSU (a)
 
 AP/IB Spanish Language and Culture (AP)(SL)(HL)(H)(P) Year · 10.0 Credits
 
@@ -1787,9 +1820,9 @@ HL Music exam after two years. Prerequisites: Consent of teacher, ability to
 play at least one instrument (or sing) and ability to read music, working
 knowledge of major and minor scales and circle of fifths. UC/CSU (f)
 
-IB Visual Arts (SL)(HL)(H)(P) Year · 10.0 Credits
+IB Studio Art A (SL)(HL)(H)(P) Year · 10.0 Credits
 
-IB Visual Arts can be taken for one or two years, and is open to all juniors and
+This Studio Art can be taken for one or two years, and is open to all juniors and
 seniors from any learning community at Berkeley High. In this fast-paced,
 interdisciplinary art course, students are taught to think like a contemporary
 artist; using art-making as a way to research science, history, religion,
@@ -2371,6 +2404,28 @@ execute all the tools you learn in the class and will create a detailed
 financial plan over the course of the year that will allow you to: Dream, Plan,
 Execute & Thrive. Open to seniors only. UC/CSU (g)
 
+PE Waiver (PE) Semester · 5.0 Credits
+
+Any student, participating in a state or nationally sponsored competitive
+sports activity, including participation in a professional dance company,
+can apply to waive out of the Physical Education requirement class at Berkeley
+High School. In order to qualify for a PE Waiver, a student
+must participate at least five (5) hours a week (or 60 hours
+in a semester) in their sport or activity. For a waiver to be
+granted, the coach of the activity is required to complete
+the documentation needed to show that the student will
+meet the state and physical standards on official letterhead 
+describing their program. The student that is applying for
+a PE Waiver must have the coach complete the appropriate
+paperwork (1. A signed PE waiver form, 2. A description
+of the activity on company letterhead, 3. Proof of registration) before
+the deadline at the beginning of the semester and have the coach email
+them to pewaivers@berkeley.net. Coaches must submit proof of completion of
+activity at the end of the semester as well. PE waivers submitted
+by parents/students will not be accepted. PE Waivers are
+available on the BHS website. For questions regarding PE
+Waivers please contact pewaivers@berkeley.net.
+
 Physics 1 (P) Year · 10.0 Credits
 
 Physics 1 is a year-long, college preparatory, algebrabased laboratory course
@@ -2770,6 +2825,13 @@ A traditional Physical Education class that rotates through various team sports.
 The Sports Education model will allow students avenues to incorporate fitness
 concepts with a focus on mastery of skills and strategies necessary to succeed
 in the team sports environment.
+
+Team Sports AM (PE) Year · 10.0 Credits
+
+A traditional Physical Education class that rotates through various team sports.
+The Sports Education model will allow students avenues to incorporate fitness
+concepts with a focus on mastery of skills and strategies necessary to succeed
+in the team sports environment. 0 period class.
 
 The World of Media (P) Year · 10.0 Credits
 

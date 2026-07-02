@@ -1,0 +1,10 @@
+{% import 'macros/courseCard.njk' as card %}
+
+{% if text %}
+    <h3>{{ text }}</h3>
+{% endif %}
+{% for course in courses %}
+    {{ card.mini(course, -1, UCOP) }}
+{% else %}
+    <h2>No Results Found</h2>
+{% endfor %}

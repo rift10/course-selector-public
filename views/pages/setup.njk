@@ -1,0 +1,30 @@
+{% import 'macros/elements.njk' as elements %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>BHS Course Catalog</title>
+    <link href="style.css" media="all" rel="stylesheet" type="text/css">
+    <script src="script.js" type="module"></script>
+</head>
+<body class="fullscreen">
+  <h1 class="title bigHeader">Berkeley High Course Catalog</h1>
+  <h2 class="bigHeader">Select your student info</h2>
+  <section id="setup">
+    <div class="settings">
+      <div class="dropdowns">
+        {{ elements.dropdown(user.grade, 'chooseGrade', 'gradeDropdown', 'Grade', [9, 10, 11, 12])}}
+        {{ elements.dropdown(user.slc, 'chooseSlc', 'slcDropdown', 'SLC', ['AC', 'AHA', 'AMPS', 'BIHS', 'CAS'])}}
+      </div>
+      <label>
+        <input type="checkbox" id="advancedCheck"{% if user.isAdvanced == 'true' %}checked{% endif %}/>
+          Advanced Math Track
+      </label>
+    </div>
+    <a class="pill bigButton" id="continue" href="/" >Continue</a>
+    <p class="error">{{ error }}</p>
+  </section>
+</body>
+</html>

@@ -27,12 +27,12 @@ for slc in slcs:
 match_and_add_courses('U9', 'freshman')
 
 # Assume anything with 'IB' is BIHS
-match_and_add_courses('BIHS', ' IB')
+match_and_add_courses('BIHS', 'IB')
 
 # Assume all other courses are AC
 ac_courses = filter(
     (lambda course: course['title'] not in [item[0] for item in data]),
-    queries.courses()
+    queries.get_unmatched_courses()
 )
 add_courses(ac_courses, 'AC')
 

@@ -16,20 +16,8 @@
       {{ elements.sidebar(user, 'edit') }}
       <a href="/" class="title"><h1>Berkeley High Course Catalog</h1></a>
     </div>
-    <div class="agFilters">
-      {% for key, value in UCOP %}
-        {{ card.addFilter(false, value, key) }}
-      {% endfor %}
-    </div>
-    <div class="levelFilters">
-      {% for key, value in levels %}
-        {{ card.addFilter(false, value, key) }}
-      {% endfor %}
-    </div>
-    <div class="otherFilters">
-      {% for key, value in otherFilters %}
-        {{ card.addFilter(false, value, key) }}
-      {% endfor %}
+    <div>
+      <h2>Editing Mode</h2>
     </div>
   </section>
   <div class="hidden" id="message"></div>

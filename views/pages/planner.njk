@@ -1,0 +1,85 @@
+{% import 'macros/courseCard.njk' as card %}
+{% import 'macros/elements.njk' as elements %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>BHS Course Catalog</title>
+    <link href="style.css" media="all" rel="stylesheet" type="text/css">
+    <script src="script.js" type="module"></script>
+  </head>
+  <body class="fullscreen">
+    <div class="fullscreen">
+      <section id="header">
+        <div id="navbar">
+          {{ elements.sidebar(user, 'plan') }}
+          <a href="/" class="title"><h1>Berkeley High Course Catalog</h1></a>
+        </div>
+      </section>
+      <div class="hidden" id="message"></div>
+      <div id="content">
+        <div class="bar-container" id="bhsBar">
+          <div class="barGroup" id="barGroupSoc" style="width: {{ totalSoc/totalBHS * 100 }}%;">
+            {{ elements.barSection('BHS', "Ethnic", "Ethnic Studies", ethnicCredit, bhsReqEthnic, totalSoc) }}
+            {{ elements.barSection('BHS', "Wh", "World History", whCredit, bhsReqWh, totalSoc) }}
+            {{ elements.barSection('BHS', "Ush", "US History", ushCredit, bhsReqUsh, totalSoc) }}
+            {{ elements.barSection('BHS', "Gov", "Government", govCredit, bhsReqGov, totalSoc) }}
+            {{ elements.barSection('BHS', "Econ", "Economics", econCredit, bhsReqEcon, totalSoc) }}
+          </div>
+          
+          {{ elements.barSection('BHS', "Eng", "English", engCredit, bhsReqEng, totalBHS) }}
+
+          <div class="barGroup" id="barGroupMath" style="width: {{ totalMath/totalBHS * 100 }}%;">
+            {{ elements.barSection('BHS', "Math1", "Math 1", math1Credit, bhsReqMath1, totalMath) }}
+            {{ elements.barSection('BHS', "Math", "Math", mathCredit, bhsReqMath1, totalMath) }}
+          </div>
+
+          <div class="barGroup" id="barGroupSci" style="width: {{ totalSci/totalBHS * 100 }}%;">
+            {{ elements.barSection('BHS', "Phys", "Physical Science", physCredit, bhsReqPhys, totalSci) }}
+            {{ elements.barSection('BHS', "Bio", "Life Science", bioCredit, bhsReqBio, totalSci) }}
+          </div>
+
+          {{ elements.barSection('BHS', "Pe", "Physical Education", peCredit, bhsReqPe, totalBHS) }}
+          {{ elements.barSection('BHS', "Lacte", "World Language / Arts / CTE", lacteCredit, bhsReqLacte, totalBHS) }}
+          {{ elements.barSection('BHS', "Elect", "Elective", electCredit, bhsReqElect, totalBHS) }}
+        </div>
+
+        <div class="bar-container" id="ucBar">
+          {{ elements.barSection('UC-Req', "A", UCOP.a ~ " (A)", aCredit, ucReqA, totalUC) }}
+          {{ elements.barSection('UC-Req', "B", UCOP.b ~ " (B)", bCredit, ucReqB, totalUC) }}
+          {{ elements.barSection('UC-Req', "C", UCOP.c ~ " (C)", cCredit, ucReqC, totalUC) }}
+          {{ elements.barSection('UC-Req', "D", UCOP.d ~ " (D)", dCredit, ucReqD, totalUC) }}
+          {{ elements.barSection('UC-Req', "E", UCOP.e ~ " (E)", eCredit, ucReqE, totalUC) }}
+          {{ elements.barSection('UC-Req', "F", UCOP.f ~ " (F)", fCredit, ucReqF, totalUC) }}
+          {{ elements.barSection('UC-Req', "G", UCOP.g ~ " (G)", gCredit, ucReqG, totalUC) }}
+        </div>
+        <div class="bar-container" id="ucRecBar">
+          {{ elements.barSection('UC-Rec', "RecA", UCOP.a ~ " (A)", aCredit, ucRecA, totalRecUC) }}
+          {{ elements.barSection('UC-Rec', "RecB", UCOP.b ~ " (B)", bCredit, ucRecB, totalRecUC) }}
+          {{ elements.barSection('UC-Rec', "RecC", UCOP.c ~ " (C)", cCredit, ucRecC, totalRecUC) }}
+          {{ elements.barSection('UC-Rec', "RecD", UCOP.d ~ " (D)", dCredit, ucRecD, totalRecUC) }}
+          {{ elements.barSection('UC-Rec', "RecE", UCOP.e ~ " (E)", eCredit, ucRecE, totalRecUC) }}
+          {{ elements.barSection('UC-Rec', "RecF", UCOP.f ~ " (F)", fCredit, ucRecF, totalRecUC) }}
+          {{ elements.barSection('UC-Rec', "RecG", UCOP.g ~ " (G)", gCredit, ucRecG, totalRecUC) }}
+        </div>
+        <div id="allCards">
+          <section id="miniCards">
+            {% for course in courses %}
+              {{ card.mini(course, -1, UCOP) }}
+            {% else %}
+              <h2>No Results Found</h2>
+            {% endfor %}
+          </section>
+          <section id="planner">
+            {{ elements.column(9, fresh, null, UCOP) }}
+            {{ elements.column(10, soph, sophOptions, UCOP) }}
+            {{ elements.column(11, junior, juniorOptions, UCOP) }}
+            {{ elements.column(12, senior, seniorOptions, UCOP) }}
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
